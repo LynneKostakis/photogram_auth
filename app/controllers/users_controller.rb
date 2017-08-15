@@ -16,9 +16,9 @@ class UsersController < ApplicationController
   end
 
   def new
-    @photo = Photo.new
+    @user = User.new
 
-    render("photos/new.html.erb")
+    render("user/new.html.erb")
   end
 
   def create
@@ -38,24 +38,24 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
+    @user = User.find(params[:id])
 
-    render("photos/edit.html.erb")
+    render("users/edit.html.erb")
   end
 
   def update
-    @photo = Photo.find(params[:id])
+    @user = User.find(params[:id])
 
-    @photo.caption = params[:caption]
-    @photo.image = params[:image]
-    @photo.user_id = params[:user_id]
+    @user.name = params[:username]
+    @user.password = params[:user_password]
+    @user.id = params[:user_id]
 
-    save_status = @photo.save
+    save_status = @user.save
 
     if save_status == true
-      redirect_to("/photos/#{@photo.id}", :notice => "Photo updated successfully.")
+      redirect_to("/user/#{@user.id}", :notice => "User updated successfully.")
     else
-      render("photos/edit.html.erb")
+      render("user/edit.html.erb")
     end
   end
 

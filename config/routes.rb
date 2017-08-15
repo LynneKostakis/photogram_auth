@@ -64,6 +64,10 @@ Rails.application.routes.draw do
   # READ
   get "/users", :controller => "users", :action => "index"
   get "/users/:id", :controller => "users", :action => "show"
+  
+    # UPDATE
+  get "/users/:id/edit", :controller => "photos", :action => "edit"
+  post "/update_user/:id", :controller => "photos", :action => "update"
 
   #------------------------------
 end

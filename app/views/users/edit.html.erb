@@ -1,8 +1,15 @@
 <!-- Validation failure messages -->
-
+<% if @photo.errors.any? %>
+  <% @photo.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
 
 <div class="page-header">
-  <h3>Edit ser #<%= @user.id %></h3>
+  <h3>Edit Photo #<%= @photo.id %></h3>
 </div>
 
 <div class="row">
