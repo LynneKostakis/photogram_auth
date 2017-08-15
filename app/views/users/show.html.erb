@@ -13,6 +13,13 @@
         <dd><%= photo.caption %></dd>
         <td><img src="<%= photo.image %>"></td>
         <dd><%= photo.user_id %></dd>
+        <td>
+          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if photo.user_id == current_user.id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+        </td>
   <% end %>
 
 </ul>

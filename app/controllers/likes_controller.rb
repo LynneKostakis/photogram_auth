@@ -12,6 +12,14 @@ class LikesController < ApplicationController
 
     render("likes/show.html.erb")
   end
+  
+  def my_likes
+    
+    @like = Like.find(current_user.id)
+
+
+    render("likes/show.html.erb")
+  end
 
   def new
     @like = Like.new
