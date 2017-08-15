@@ -11,7 +11,7 @@
   <ul>
   <% @photos.each do |photo| %>
         <dd><%= photo.caption %></dd>
-        <td><%= photo.image %></td>
+        <td><img src="<%= photo.image %>"></td>
         <dd><%= photo.user_id %></dd>
   <% end %>
 
