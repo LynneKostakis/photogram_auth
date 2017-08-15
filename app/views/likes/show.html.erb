@@ -9,7 +9,8 @@
       <dd><%= @like.user_id %></dd>
 
       <dt>Photo</dt>
-      <dd><%= @like.photo_id %></dd>
+      <dd><img src= "<%= @like.photo.image %>"></dd>
+      <dd><%= @like.photo.caption %></dd>
 
     </dl>
 
