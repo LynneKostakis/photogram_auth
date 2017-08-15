@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @photos = @user.photos
 
+
+
     render("users/show.html.erb")
   end
 
