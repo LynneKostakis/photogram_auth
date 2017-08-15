@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
+</div>
+  
+  <ul>
+  <% @photos.each do |photo| %>
+        <dd><%= photo.caption %></dd>
+        <td><img src="<%= photo.image %>"></td>
+        <dd><%= photo.user_id %></dd>
+        <td>
+          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if photo.user_id == current_user.id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+        </td>
+  <% end %>
+
+</ul>
+  
