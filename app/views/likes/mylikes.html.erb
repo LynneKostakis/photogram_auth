@@ -1,0 +1,95 @@
+<div class="page-header">
+  <h1>
+    My Likes
+    <a href="/likes/new" class="btn btn-lg btn-success">New Like</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% @likes.each do |like| %>
+      <% photo = like.photo %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= photo.user.username %> <%= time_ago_in_words(photo.created_at) %> ago</div>
+        <div class="panel-body">
+        <img src="<%= photo.image %>">
+        </br>
+        <%= photo.caption %>
+        </br>
+        
+       <% if Like.find_by(:user_id=>current_user.id, :photo_id=>photo.id) != nil %>
+         <a href="/delete_like/<%= Like.find_by(:user_id=>current_user.id, :photo_id=>photo.id).id %>" class="btn btn-link">
+            <i class="fa fa-heart"></i>
+          </a>
+       <% else %>
+            <form action="/create_like" method="post">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value=" <%= current_user.id %>">
+
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+            </form>
+       <% end %>
+     
+       
+       <% found = false %>
+       <% photo.likes.each do |like| %>
+         <% found = true %>
+         <%= like.user.username %> &nbsp;
+       <% end %>
+       
+       <% if found %>
+         likes this
+       <% end %>
+        <% photo.comments.each do |comment| %>
+        
+          </br>
+          <%= comment.user.username %> <%= time_ago_in_words(comment.created_at) %> ago
+         </br>
+          <%= comment.body %>
+        <% end %>
+        
+        <form action="/create_comment" method="post">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value=" <%= current_user.id %>">
+
+
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <div class="input-group">
+                    <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required="">
+
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">
+                        <i class="fa fa-commenting-o"></i>
+                      </button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div>
+              </form>
+        </div>
+        
+        
+        <div class="panel-footer">
+        <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if photo.user_id == current_user.id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+        </div>
+        
+        
+      </div>
+
+      <% end %>
+  </div>
+</div>
