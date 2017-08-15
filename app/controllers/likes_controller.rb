@@ -15,10 +15,10 @@ class LikesController < ApplicationController
   
   def my_likes
     
-    @like = Like.find(current_user.id)
+    @likes = Like.where(:user_id=>current_user.id)
 
 
-    render("likes/show.html.erb")
+    render("likes/mylikes.html.erb")
   end
 
   def new
@@ -36,7 +36,7 @@ class LikesController < ApplicationController
     save_status = @like.save
 
     if save_status == true
-      redirect_to("/likes/#{@like.id}", :notice => "Like created successfully.")
+      redirect_to("/photos", :notice => "Like created successfully.")
     else
       render("likes/new.html.erb")
     end
