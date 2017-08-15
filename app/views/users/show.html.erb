@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
+</div>
+  
+  <ul>
+  <% Photo.where(:user_id => @user.id).each do |photo| %>
+        <dd><%= photo.caption %></dd>
+        <td><%= photo.image %></td>
+        <dd><%= photo.user_id %></dd>
+  <% end %>
+
+</ul>
+  
